@@ -1,4 +1,7 @@
-const { authenticate } = require("../factories/session");
+const { authenticate } = require("../../support/factories/session");
+const { createUser } = require("../../support/factories/user");
+
+require("../../plugins");
 
 describe("Test Main", () => {
   context("Login view", () => {
@@ -22,11 +25,13 @@ describe("Test Main", () => {
   });
 
   context("Main view", () => {
-    const [session, sig] = authenticate();
     before(() => {
-      cy.setCookie("session", session);
-      cy.setCookie("session.sig", sig);
-      cy.visit("/blogs");
+      cy.task("createUser").then((user) => {
+        const [session, sig] = authenticate(user);
+        cy.setCookie("session", session);
+        cy.setCookie("session.sig", sig);
+        cy.visit("/blogs");
+      });
     });
     it("It should show logout button if it's logged", () => {
       cy.contains("Logout");
