@@ -1,6 +1,3 @@
-const { authenticate } = require("../../support/factories/session");
-const { createUser } = require("../../support/factories/user");
-
 require("../../plugins");
 
 describe("Test Main", () => {
@@ -26,12 +23,7 @@ describe("Test Main", () => {
 
   context("Main view", () => {
     before(() => {
-      cy.task("createUser").then((user) => {
-        const [session, sig] = authenticate(user);
-        cy.setCookie("session", session);
-        cy.setCookie("session.sig", sig);
-        cy.visit("/blogs");
-      });
+      cy.login();
     });
     it("It should show logout button if it's logged", () => {
       cy.contains("Logout");
