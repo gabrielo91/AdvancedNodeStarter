@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import map from 'lodash/map';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchBlogs } from '../../actions';
+import React, { Component } from "react";
+import map from "lodash/map";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchBlogs } from "../../actions";
 
 class BlogList extends Component {
   componentDidMount() {
@@ -10,9 +10,13 @@ class BlogList extends Component {
   }
 
   renderBlogs() {
-    return map(this.props.blogs, blog => {
+    return map(this.props.blogs, (blog) => {
       return (
-        <div className="card darken-1 horizontal" key={blog._id}>
+        <div
+          data-cy="blog-card"
+          className="card darken-1 horizontal"
+          key={blog._id}
+        >
           <div className="card-stacked">
             <div className="card-content">
               <span className="card-title">{blog.title}</span>
