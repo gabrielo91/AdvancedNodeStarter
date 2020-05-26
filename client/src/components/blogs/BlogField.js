@@ -9,7 +9,11 @@ export default ({ input, label, meta: { error, touched } }) => {
         {...input}
         style={{ marginBottom: "5px" }}
       />
-      <div className="red-text" style={{ marginBottom: "20px" }}>
+      <div
+        data-cy={`input-${input.name}-error`}
+        className="red-text"
+        style={{ marginBottom: "20px" }}
+      >
         {touched && error}
       </div>
     </div>
