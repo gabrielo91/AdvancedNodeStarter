@@ -3,3 +3,5 @@ nohup.out
 .DS_Store
 package-lock.json
 cypress/*
+credentials.csv
+config/dev.js

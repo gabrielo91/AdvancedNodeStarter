@@ -19,7 +19,7 @@ class BlogList extends Component {
         >
           <div className="card-stacked">
             <div className="card-content">
-              <span dssName="card-title">{blog.title}</span>
+              <span className="card-title">{blog.title}</span>
               <p>{blog.content}</p>
             </div>
             <div className="card-action">
