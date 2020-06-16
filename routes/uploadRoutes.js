@@ -5,7 +5,7 @@ const uuid = require("uuid/v1");
 
 const s3 = new AWS.S3({
   accessKeyId: keys.access_key_id,
-  secretAccessKey: keys.secretAccessKey,
+  secretAccessKey: keys.secret_access_key,
 });
 
 module.exports = (app) => {
@@ -13,14 +13,13 @@ module.exports = (app) => {
     const userId = req.user.id;
     const date = new Date().toISOString().substring(0, 10);
     const fileName = uuid();
-    const key = `${userId}/${date}/${fileName}.jpg`;
+    const key = `${userId}/${date}/${fileName}.jpeg`;
     const params = {
       Bucket: "blog-bucket-advanced-node",
-      ContentType: "jpeg",
       Key: key,
+      ContentType: "image/jpeg",
     };
     s3.getSignedUrl("putObject", params, (err, url) => {
-      console.log("The URL is", url);
       res.send({ key, url });
     });
   });
